@@ -1,0 +1,7 @@
+info:
+  name: 1. Getting Unauthenticated Endpoint
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

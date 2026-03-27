@@ -1,0 +1,24 @@
+info:
+  name: 2. Add State Filter
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: https://projects.propublica.org/nonprofits/api/v2/search.json?q=archives&state[id]={{your_state}}
+  params:
+    - name: q
+      value: archives
+      type: query
+    - name: state[id]
+      value: "{{your_state}}"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: https://projects.propublica.org/nonprofits/api

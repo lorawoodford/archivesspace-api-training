@@ -1,0 +1,21 @@
+info:
+  name: 2. Authenticate
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{ASPACE_BACKEND_URL}}/users/{{USER}}/login?password={{PW}}"
+  params:
+    - name: password
+      value: "{{PW}}"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: https://archivesspace.github.io/archivesspace/api/#authentication

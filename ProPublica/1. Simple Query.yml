@@ -1,0 +1,21 @@
+info:
+  name: 1. Simple Query
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: https://projects.propublica.org/nonprofits/api/v2/search.json?q=archives
+  params:
+    - name: q
+      value: archives
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: https://projects.propublica.org/nonprofits/api

@@ -1,0 +1,28 @@
+info:
+  name: 5. Authenticate and store
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{ASPACE_BACKEND_URL}}/users/{{USER}}/login?password={{PW}}"
+  params:
+    - name: password
+      value: "{{PW}}"
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const session = res.body.session;
+        bru.setGlobalEnvVar("SESSION", session);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: https://archivesspace.github.io/archivesspace/api/#authentication
