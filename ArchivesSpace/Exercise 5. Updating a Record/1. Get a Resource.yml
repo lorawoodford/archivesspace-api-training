@@ -1,11 +1,14 @@
 info:
-  name: 1. Get a List of Repositories
+  name: 1. Get a Resource
   type: http
   seq: 1
 
 http:
   method: GET
   url: "{{ASPACE_BACKEND_URL}}/repositories/2/resources/16"
+  headers:
+    - name: X-ArchivesSpace-Session
+      value: "{{SESSION}}"
   auth: inherit
 
 settings:
@@ -14,4 +17,4 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: https://archivesspace.github.io/archivesspace/api/#get-a-list-of-resources-for-a-repository
+docs: https://archivesspace.github.io/archivesspace/api/#get-a-resource

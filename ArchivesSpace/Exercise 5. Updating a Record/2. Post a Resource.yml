@@ -1,14 +1,17 @@
 info:
-  name: 4. Get a List of Repositories - Auth with Var
+  name: 2. Post a Resource
   type: http
-  seq: 4
+  seq: 2
 
 http:
-  method: GET
+  method: POST
   url: "{{ASPACE_BACKEND_URL}}/repositories/2/resources/16"
   headers:
     - name: X-ArchivesSpace-Session
       value: "{{SESSION}}"
+  body:
+    type: json
+    data: ""
   auth: inherit
 
 settings:
@@ -17,4 +20,4 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: https://archivesspace.github.io/archivesspace/api/#get-a-list-of-resources-for-a-repository
+docs: https://archivesspace.github.io/archivesspace/api/#get-a-resource

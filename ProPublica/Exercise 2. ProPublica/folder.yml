@@ -1,0 +1,7 @@
+info:
+  name: Exercise 2. ProPublica
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

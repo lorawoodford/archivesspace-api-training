@@ -1,7 +1,7 @@
 info:
   name: 3. Get Organization Details
   type: http
-  seq: 3
+  seq: 1
 
 http:
   method: GET

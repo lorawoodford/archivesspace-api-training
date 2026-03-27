@@ -1,0 +1,7 @@
+info:
+  name: Exercise 5. Updating a Record
+  type: folder
+  seq: 3
+
+request:
+  auth: inherit

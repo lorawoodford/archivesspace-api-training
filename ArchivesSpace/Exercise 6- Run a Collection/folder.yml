@@ -1,0 +1,7 @@
+info:
+  name: "Exercise 6: Run a Collection"
+  type: folder
+  seq: 4
+
+request:
+  auth: inherit

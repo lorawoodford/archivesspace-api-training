@@ -1,7 +1,7 @@
 info:
-  name: 6. Get a List of Repositories - Auth with Script
+  name: 4. Get a Resource - Auth with Var
   type: http
-  seq: 6
+  seq: 4
 
 http:
   method: GET
@@ -17,4 +17,4 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: https://archivesspace.github.io/archivesspace/api/#get-a-list-of-resources-for-a-repository
+docs: https://archivesspace.github.io/archivesspace/api/#get-a-resource
