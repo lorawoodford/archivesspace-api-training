@@ -16,8 +16,11 @@ runtime:
   scripts:
     - type: after-response
       code: |-
+        // Grab session value from response body and assign it to variable named "session"
         const session = res.body.session;
-        bru.setGlobalEnvVar("SESSION", session);
+
+        // Set a run-time variable named "SESSION" to the value of that variable
+        bru.setVar("SESSION", session);
 
 settings:
   encodeUrl: true

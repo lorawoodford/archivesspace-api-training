@@ -1,0 +1,12 @@
+name: api-lyrtech
+variables:
+  - name: ASPACE_BACKEND_URL
+    value: https://api.lyrtech.org/staff/api
+  - name: USER
+    value: ""
+  - name: PW
+    value: ""
+  - name: SESSION
+    value: ""
+  - name: PROPUBLICA_URL
+    value: https://projects.propublica.org/nonprofits/api/v2

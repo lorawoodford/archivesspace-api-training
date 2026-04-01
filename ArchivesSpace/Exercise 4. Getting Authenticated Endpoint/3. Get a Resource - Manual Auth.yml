@@ -8,7 +8,7 @@ http:
   url: "{{ASPACE_BACKEND_URL}}/repositories/2/resources/16"
   headers:
     - name: X-ArchivesSpace-Session
-      value: 01ef8ba28dd7fdc3be1080688f8714957bd146a039626122fa4972e48b505da3
+      value: ""
   auth: inherit
 
 settings:
