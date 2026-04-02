@@ -1,0 +1,38 @@
+info:
+  name: 1. Move One Archival Object
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{ASPACE_BACKEND_URL}}/repositories/{{repo_id}}/archival_objects/{{ao_parent_id}}/accept_children?children[]={{ao_uri_to_be_moved}}&position={{position}}"
+  headers:
+    - name: X-ArchivesSpace-Session
+      value: "{{SESSION}}"
+  params:
+    - name: children[]
+      value: "{{ao_uri_to_be_moved}}"
+      type: query
+    - name: position
+      value: "{{position}}"
+      type: query
+  auth: inherit
+
+runtime:
+  variables:
+    - name: ao_uri_to_be_moved
+      value: ""
+    - name: ao_parent_id
+      value: ""
+    - name: repo_id
+      value: ""
+    - name: position
+      value: ""
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: https://archivesspace.github.io/archivesspace/api/#move-existing-archival-objects-to-become-children-of-an-archival-object

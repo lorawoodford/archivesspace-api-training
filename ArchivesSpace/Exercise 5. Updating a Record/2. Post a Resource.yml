@@ -20,4 +20,4 @@ settings:
   followRedirects: true
   maxRedirects: 5
 
-docs: https://archivesspace.github.io/archivesspace/api/#get-a-resource
+docs: https://archivesspace.github.io/archivesspace/api/#update-a-resource
