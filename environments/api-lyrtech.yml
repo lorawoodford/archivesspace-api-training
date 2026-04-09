@@ -10,3 +10,11 @@ variables:
     value: ""
   - name: PROPUBLICA_URL
     value: https://projects.propublica.org/nonprofits/api/v2
+  - name: ACCESSION_COUNT
+    value: ""
+  - name: RESOURCE_COUNT
+    value: ""
+  - name: AO_COUNT
+    value: ""
+  - name: DO_COUNT
+    value: ""

@@ -1,0 +1,43 @@
+info:
+  name: Create a Defined Number of Accessions
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{ASPACE_BACKEND_URL}}/repositories/{{REPOSITORY_ID}}/accessions"
+  headers:
+    - name: X-ArchivesSpace-Session
+      value: "{{SESSION}}"
+  body:
+    type: json
+    data: |-
+      {
+          "title": "Test accession {{currentAcc}}",
+          "accession_date": "2025-07-18",
+          "id_0": "{{currentAcc}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        let currentAcc = bru.getVar("currentAcc") || 0;
+        bru.setVar("currentAcc", currentAcc + 1);
+    - type: after-response
+      code: |-
+        const totalAccs = bru.getEnvVar("ACCESSION_COUNT") || 10;
+        const currentAcc = bru.getVar("currentAcc");
+
+        if (currentAcc < totalAccs) {
+          bru.setNextRequest("Create a Defined Number of Accessions"); 
+        } else {
+          bru.setVar("currentAcc", 0);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

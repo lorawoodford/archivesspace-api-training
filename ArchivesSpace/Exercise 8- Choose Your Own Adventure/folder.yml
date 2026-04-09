@@ -1,0 +1,7 @@
+info:
+  name: "Exercise 8: Choose Your Own Adventure"
+  type: folder
+  seq: 6
+
+request:
+  auth: inherit

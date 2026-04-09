@@ -1,0 +1,72 @@
+info:
+  name: Create a Defined Number of Resources
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{ASPACE_BACKEND_URL}}/repositories/{{REPOSITORY_ID}}/resources"
+  headers:
+    - name: X-ArchivesSpace-Session
+      value: "{{SESSION}}"
+  body:
+    type: json
+    data: |-
+      {
+          "title": "Test resource {{currentRes}}",
+          "ead_id": "EAD.{{$randomInt}}",
+          "id_0": "EAD",
+          "id_1": "{{$randomInt}}",
+          "level": "collection",
+          "finding_aid_language": "eng",
+          "finding_aid_script": "Latn",
+          "extents": [
+              {
+                  "portion": "whole",
+                  "number": "1",
+                  "extent_type": "cubic_feet"
+              }
+          ],
+          "lang_materials": [
+              {
+                  "language_and_script": {
+                      "language": "eng",
+                      "jsonmodel_type": "language_and_script"
+                  }
+              }
+          ],
+          "dates": [
+              {
+                  "begin": "1906-10-29",
+                  "end": "1907-03-03",
+                  "date_type": "inclusive",
+                  "label": "creation"
+              }
+          ]
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        let currentRes = bru.getVar("currentRes") || 0;
+        bru.setVar("currentRes", currentRes + 1);
+    - type: after-response
+      code: |-
+        const totalRes = bru.getEnvVar("RESOURCE_COUNT") || 10;
+        const currentRes = bru.getVar("currentRes");
+
+        if (currentRes < totalRes) {
+          bru.setNextRequest("Create a Defined Number of Resources"); 
+        } else {
+          bru.setVar("currentRes", 0);
+        }
+
+        bru.setVar("LAST_RESOURCE", res.getBody().id)
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

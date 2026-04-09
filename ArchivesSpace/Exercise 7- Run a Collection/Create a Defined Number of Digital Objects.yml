@@ -1,0 +1,60 @@
+info:
+  name: Create a Defined Number of Digital Objects
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{ASPACE_BACKEND_URL}}/repositories/{{REPOSITORY_ID}}/digital_objects"
+  headers:
+    - name: X-ArchivesSpace-Session
+      value: "{{SESSION}}"
+  body:
+    type: json
+    data: |-
+      {
+          "title": "Test DO {{currentDo}}",
+          "digital_object_id": "DOID_{{$randomInt}}",
+          "publish": true,
+          "digital_object_type": "still_image",
+          "file_versions": [
+              {
+                  "file_uri": "https://example.com/{{currentDo}}",
+                  "publish": true,
+                  "use_statement": "image-service",
+                  "jsonmodel_type": "file_version",
+                  "is_representative": true
+              },
+              {
+                  "file_uri": "https://example.com/{{currentDo}}/2",
+                  "publish": true,
+                  "use_statement": "video-service",
+                  "jsonmodel_type": "file_version",
+                  "is_representative": false
+              }
+          ]
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        let currentDo = bru.getVar("currentDo") || 0;
+        bru.setVar("currentDo", currentDo + 1);
+    - type: after-response
+      code: |-
+        const totalDos = bru.getEnvVar("DO_COUNT") || 10;
+        const currentDo = bru.getVar("currentDo");
+
+        if (currentDo < totalDos) {
+          bru.setNextRequest("Create a Defined Number of Digital Objects"); 
+        } else {
+          bru.setVar("currentDo", 0);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

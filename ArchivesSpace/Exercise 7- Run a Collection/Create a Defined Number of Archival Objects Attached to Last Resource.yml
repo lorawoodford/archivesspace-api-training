@@ -1,0 +1,45 @@
+info:
+  name: Create a Defined Number of Archival Objects Attached to Last Resource
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{ASPACE_BACKEND_URL}}/repositories/{{REPOSITORY_ID}}/archival_objects"
+  headers:
+    - name: X-ArchivesSpace-Session
+      value: "{{SESSION}}"
+  body:
+    type: json
+    data: |-
+      {
+          "title": "Test AO {{currentAo}}",
+          "level": "file",
+          "resource": {
+              "ref": "/repositories/2/resources/{{LAST_RESOURCE}}"
+          }
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |-
+        let currentAo = bru.getVar("currentAo") || 0;
+        bru.setVar("currentAo", currentAo + 1);
+    - type: after-response
+      code: |-
+        const totalAos = bru.getEnvVar("AO_COUNT") || 10;
+        const currentAo = bru.getVar("currentAo");
+
+        if (currentAo < totalAos) {
+          bru.setNextRequest("Create a Defined Number of Archival Objects Attached to Last Resource"); 
+        } else {
+          bru.setVar("currentAo", 0);
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

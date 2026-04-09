@@ -1,0 +1,28 @@
+info:
+  name: Authenticate
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{ASPACE_BACKEND_URL}}/users/{{USER}}/login?password={{PW}}"
+  params:
+    - name: password
+      value: "{{PW}}"
+      type: query
+  body:
+    type: multipart-form
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        let jsonData = res.getBody();
+        bru.setEnvVar("SESSION", jsonData.session);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
