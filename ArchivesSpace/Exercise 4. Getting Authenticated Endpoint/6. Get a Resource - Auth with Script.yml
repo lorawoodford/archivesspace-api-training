@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{ASPACE_BACKEND_URL}}/repositories/2/resources/16"
+  url: "{{ASPACE_BACKEND_URL}}/repositories/2/resources/{{YOUR_RESOURCE_ID}}"
   headers:
     - name: X-ArchivesSpace-Session
       value: "{{SESSION}}"

@@ -18,3 +18,5 @@ variables:
     value: ""
   - name: DO_COUNT
     value: ""
+  - name: YOUR_RESOURCE_ID
+    value: ""
